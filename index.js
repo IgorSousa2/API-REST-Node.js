@@ -1,7 +1,7 @@
-const express = require('express');
+//FUNÇÃO: SUBIR O SERVIDOR
 
-const app = express();
+const customExpress = require ('./config/customExpress')
 
-app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
+const app = customExpress()
 
-app.get('/trofeus', (req, res) => res.send('Rota de troféus'))
+app.listen(3000, () => console.log('Servidor rodando na porta 3000'))
