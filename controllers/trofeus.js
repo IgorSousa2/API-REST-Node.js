@@ -6,7 +6,6 @@ module.exports = app => {
     app.post('/trofeus', (req, res) => {
         const trofeu = req.body
 
-        Trofeus.insereTrofeu(trofeu)
-        res.send('Rota de troféus (POST)')
+        Trofeus.insereTrofeu(trofeu, res)
     })
 }
