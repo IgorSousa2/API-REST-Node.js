@@ -35,13 +35,66 @@ class Trofeus{
                 if(erro){
                     res.status(400).json(erro)        
                 } else {
-                    res.status(201).json(resultados)
+                    res.status(201).json(trofeu)
                 }
             
             })
         }
 
         
+    }
+
+    lista (res) {
+        const sql = 'SELECT * FROM trofeus'
+
+        conexao.query(sql, (erro, resultados) => {
+            if(erro){
+                res.status(400).json(erro)
+            } else{
+                res.status(200).json(resultados)
+            }
+        })
+    }
+
+    buscaPorId (id, res) {
+        const sql = `SELECT * FROM trofeus WHERE id=${id}`
+
+        conexao.query(sql, (erro, resultados) => {
+            const trofeuUnico = resultados[0]
+            if(erro){
+                res.status(400).json(erro)
+            } else {
+                res.status(200).json(trofeuUnico)
+            }
+        })
+    }
+
+    alteraTrofeu(id, valores, res){
+        if(valores.data_conclusao){
+            valores.data_conclusao = moment(valores.data_conclusao, 'DD/MM/YYYY').format('YYYY-MM-DD HH:MM:SS')
+        }
+
+        const sql = 'UPDATE trofeus SET ? WHERE id=?'
+
+        conexao.query(sql, [valores, id], (erro, resultados) => {
+            if(erro){
+                res.status(400).json(erro)
+            } else {
+                res.status(200).json({...valores, id})
+            }
+        })
+    }
+
+    deletaTrofeu(id, res){
+        const sql = `DELETE FROM trofeus WHERE id=${id}`
+
+        conexao.query(sql, (erro, resultados) => {
+            if(erro){
+                res.status(400).json(erro)
+            } else {
+                res.status(200).json({id})
+            }
+        })
     }
 }
 
