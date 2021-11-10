@@ -13,12 +13,6 @@ class Trofeus{
                 valido: trofeuValido,
                 mensagem: 'Troféu deve ter um nome válido'
             }
-            //,
-            //{
-            //    nome: 'nome',
-            //    valido: trofeuValido,
-            //    mensagem: 'Troféu deve ter um nome válido'
-            //},
         ]
 
         const erros = validation.filter(campo => !campo.valido)
